@@ -5,19 +5,20 @@ int a[1005];
 
 void Dijstra(int src)
 {
-    queue<pair<int, int>> q;
-    q.push({src, 0});
+    priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> q;
+
+    q.push({0, src});
     a[src] = 0;
     while (!q.empty())
     {
-        auto x = q.front();
+        auto x = q.top();
         q.pop();
-        for (auto v : g[x.first])
+        for (auto v : g[x.second])
         {
-            if (v.second + x.second < a[v.first])
+            if (v.second + x.first < a[v.first])
             {
-                a[v.first] = v.second + x.second;
-                q.push({v.first,a[v.first]});
+                a[v.first] = v.second + x.first;
+                q.push({a[v.first], v.first});
             }
         }
     }
