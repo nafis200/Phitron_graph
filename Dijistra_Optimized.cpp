@@ -14,9 +14,7 @@ void Dijstra(int src)
     {
         auto x = q.top();
         q.pop();
-        if(x.first > a[x.second]){
-            continue;
-        }
+        
         for (auto v : g[x.second])
         {
             if (v.second + x.first < a[v.first])
