@@ -1,0 +1,95 @@
+
+// 4 5
+// 0 1 3
+// 0 2 6
+// 1 2 2
+// 1 3 5
+// 2 3 4
+
+// n * n matrix
+
+//  i to j dirrect better or i + k, k + j better
+
+// 3 * 3
+//  i   k   j
+//  0   0   0
+//  0   0   1
+//  0   0   2
+//  0   1   0
+//  0   1   1
+//  0   1   2
+//  0   2   0
+//  0   2   1
+//  0   2   2
+//  1   0   0
+//  1   0   1
+//  1   0   2
+//  1   1   0
+//  1   1   1
+//  1   1   2
+//  2   0   0
+//  2   0   1
+//  2   0   2
+//  2   1   0
+//  2   1   1
+//  2   1   2
+//  2   0   2
+//  2   1   2
+//  2   2   2
+
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int n, e;
+    cin >> n >> e;
+    int adj_mat[n][n];
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < n; j++)
+        {
+            if (i == j)
+            {
+                adj_mat[i][j] = 0;
+            }
+            else
+            {
+                adj_mat[i][j] = INT_MAX;
+            }
+        }
+    }
+    while (e--)
+    {
+        int a, b, c;
+        cin >> a >> b >> c;
+        adj_mat[a][b] = c;
+    }
+
+    for (int i = 0; i < n; i++)
+    {
+        for (int k = 0; k < n; k++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                if (adj_mat[i][k]!= INT_MAX && adj_mat[k][j] != INT_MAX && adj_mat[i][j] > adj_mat[i][k] + adj_mat[k][j])
+                {
+                    adj_mat[i][j] = adj_mat[i][k] + adj_mat[k][j];
+                }
+            }
+        }
+    }
+
+    //  for(int i = 0; i < n; i++){
+    //     for(int j = 0; j < n; j++){
+    //         if(adj_mat[i][j] == INT_MAX){
+    //             cout << "INF ";
+    //         }
+    //         else{
+    //             cout << adj_mat[i][j] << " ";
+    //         }
+    //     }
+    //     cout << "\n";
+    // }
+
+    return 0;
+}
