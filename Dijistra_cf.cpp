@@ -1,58 +1,63 @@
 #include <bits/stdc++.h>
 using namespace std;
-const int N = 1e5 + 9;
-int dist[N];
-int n, m;
-const int inf = 1e8;
+const long long N = 1e5 + 9;
+long long dist[N];
+long long n, m;
+const long long inf = 1e17;
 
-vector<pair<int, int>> g[N];
-int par[N];
+vector<pair<long long, long long>> g[N];
+long long par[N];
 
 void bfs()
 {
-    queue<pair<int, int>> q;
+    priority_queue<pair<long long, long long>, vector<pair<long long, long long>>, greater<pair<long long, long long>>> q;
+
     dist[1] = 0;
-    q.push({1, 0});
+    q.push({0, 1});
 
     while (!q.empty())
     {
-        auto u = q.front();
+        auto u = q.top();
         q.pop();
-        int node = u.first;
-        int d = u.second;
+        long long node = u.second;
+        long long d = u.first;
+
 
         for (auto v : g[node])
         {
-            if (dist[v.first] > dist[node] + v.second)
+            if (dist[v.first] > (dist[node] + v.second))
             {
                 dist[v.first] = dist[node] + v.second;
-                q.push({v.first, dist[v.first]});
+                q.push({dist[v.first], v.first});
                 par[v.first] = node;
             }
         }
     }
 }
 
-int main()
+int32_t main()
 {
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    cout.tie(0);
     memset(par, -1, sizeof(par));
     cin >> n >> m;
-    for (int i = 1; i <= m; i++)
+    for (long long i = 1; i <= m; i++)
     {
-        int u, v, w;
+        long long u, v, w;
         cin >> u >> v >> w;
         g[u].push_back({v, w});
         g[v].push_back({u, w});
     }
 
-    for (int i = 1; i <= n; i++)
+    for (long long i = 1; i <= n; i++)
     {
         dist[i] = inf;
     }
     bfs();
 
-    vector<int> vis;
-    int last = n;
+    vector<long long> vis;
+    long long last = n;
 
     if (par[n] == -1)
     {
