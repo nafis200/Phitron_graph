@@ -11,7 +11,7 @@
 //  i to j dirrect better or i + k, k + j better
 
 // 3 * 3
-//  i   k   j
+//  k   i   j
 //  0   0   0
 //  0   0   1
 //  0   0   2
@@ -65,9 +65,9 @@ int main()
         adj_mat[a][b] = c;
     }
 
-    for (int i = 0; i < n; i++)
+    for (int k = 0; i < n; i++)
     {
-        for (int k = 0; k < n; k++)
+        for (int i = 0; k < n; k++)
         {
             for (int j = 0; j < n; j++)
             {
